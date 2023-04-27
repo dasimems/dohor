@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, LoggedInContainer, Map, OnlineRequest, Passengers, SearchingPassenger } from "../components";
 import { blackColor, dangerColor, primaryColor, whiteColor } from "../assets/colors";
@@ -10,6 +10,9 @@ import { NotificationIcon, TargetIcon } from "../assets/icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useActionContext, useNavigationContext, useUserContext } from "../context";
 import { passengerList } from "../data/navigationData";
+
+const windowWidth = Dimensions.get("window").width
+const windowHeight = Dimensions.get("window").height
 
 const Header = ()=> {
   const {navigate} = useNavigation();
@@ -173,6 +176,8 @@ const Navigation = () => {
     >
       <View style={{
         flex: 1,
+        width: windowWidth,
+        height: windowHeight,
         position: "relative",
         backgroundColor: blackColor.opacity100
       }}>
