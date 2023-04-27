@@ -47,7 +47,7 @@ const Header = () => {
                     </View>
                         
 
-                    <TouchableOpacity onPress={()=>{
+                    {/* <TouchableOpacity onPress={()=>{
                         navigate(NavNames.CreditDetails.name)
                     }} style={{
                         backgroundColor: blackColor.opacity100,
@@ -66,7 +66,7 @@ const Header = () => {
                             fontFamily: lato.bold.default,
                             fontSize: 12,
                         }}>2500</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                 </SafeAreaView>
         
@@ -185,6 +185,23 @@ const Withdraw = () => {
                 </ScrollView>
 
             </View>
+
+            <View style={{
+                paddingVertical: 20,
+                paddingHorizontal: 20
+            }}>  
+
+                 <Button loaderSize={17} loadingStyle={{
+                    
+                    backgroundColor: primaryColor.opacity500,
+
+                 }} textColor={whiteColor.default} style={{
+                    backgroundColor: primaryColor.default,
+                 }} text="Withdraw" />
+            </View>
+
+
+
            
 
         </View>
