@@ -54,14 +54,13 @@ const Map = () => {
       
       {from && <MapView 
         ref={mapRef}
-      style={{
+        style={{
           flex: 1,
           width: "100%",
           height: "100%",
 
         }}
         provider={PROVIDER_GOOGLE}
-        mapType="mutedStandard"
         showsUserLocation={true}
         followsUserLocation={true}
         showsCompass={true}
@@ -76,11 +75,11 @@ const Map = () => {
         
       >
 
-          <Marker
-            coordinate={{latitude: from && from.latitude? from.latitude: 37.78825, longitude: from && from.longitude? from.longitude: -122.4324}}
+          {from && <Marker
+            coordinate={{latitude: from.latitude, longitude: from.longitude}}
             title="Your present location"
-            description="Your present location"
-          />
+            identifier="Present"
+          />}
 
       </MapView>}
       
