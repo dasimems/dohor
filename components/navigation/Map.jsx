@@ -9,12 +9,12 @@ import { lato } from '../../fonts';
 
 const Map = () => {
   const {from, fetchLocation} = useNavigationContext();
-  const [mapRef, setMapRef] = useState(null);
+  const mapRef = useRef(null);
   const [fitOnce, setFitOnce] = useState(false)
 
   const fitMap = (type) => {
 
-    mapRef.fitToCoordinates([{latitude: from.latitude, longitude: from.longitude}], {
+    mapRef.current.fitToCoordinates([{latitude: from.latitude, longitude: from.longitude}], {
       edgePadding: {
         top: type === "from" ? 200 : 50,
         left: type === "from" ? 200 : 50,
@@ -36,14 +36,14 @@ const Map = () => {
 
   useEffect(()=>{
 
-    if(from && !fitOnce && mapRef){
+    if(from && !fitOnce){
 
       fitMap()
 
       setFitOnce(true)
     }
 
-  },[from, fitOnce, mapRef])
+  },[from, fitOnce])
   
   return (
     <View style={{
@@ -53,7 +53,7 @@ const Map = () => {
 
       
       {from && <MapView 
-        ref={(element)=>{setMapRef(element)}}
+        ref={mapRef}
       style={{
           flex: 1,
           width: "100%",
