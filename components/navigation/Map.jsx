@@ -9,12 +9,12 @@ import { lato } from '../../fonts';
 
 const Map = () => {
   const {from, fetchLocation} = useNavigationContext();
-  const mapRef = useRef(null);
+  const [mapRef, setMapRef] = useState(null);
   const [fitOnce, setFitOnce] = useState(false)
 
   const fitMap = (type) => {
 
-    mapRef.current.fitToCoordinates([{latitude: from.latitude, longitude: from.longitude}], {
+    mapRef.fitToCoordinates([{latitude: from.latitude, longitude: from.longitude}], {
       edgePadding: {
         top: type === "from" ? 200 : 50,
         left: type === "from" ? 200 : 50,
@@ -36,14 +36,14 @@ const Map = () => {
 
   useEffect(()=>{
 
-    if(from && !fitOnce){
+    if(from && !fitOnce && mapRef){
 
       fitMap()
 
       setFitOnce(true)
     }
 
-  },[from, fitOnce])
+  },[from, fitOnce, mapRef])
   
   return (
     <View style={{
@@ -52,16 +52,15 @@ const Map = () => {
     }}>
 
       
-      <MapView 
-        ref={mapRef}
+      {from && <MapView 
+        ref={(element)=>{setMapRef(element)}}
       style={{
           flex: 1,
           width: "100%",
-          height: "115%",
-          marginTop: -50
+          height: "100%",
 
         }}
-        // provider={PROVIDER_GOOGLE}
+        provider={PROVIDER_GOOGLE}
         mapType="mutedStandard"
         showsUserLocation={true}
         followsUserLocation={true}
@@ -83,7 +82,7 @@ const Map = () => {
             description="Your present location"
           />
 
-      </MapView>
+      </MapView>}
       
       {!from && <View style={{
         flex: 1,
